@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'dob',
+        'is_active',
+        'level',
+        'rating',
+        'metadata',
     ];
 
     /**
@@ -43,6 +48,11 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'dob' => 'date',
+            'is_active' => 'boolean',
+            'level' => 'integer',
+            'rating' => 'float',
+            'metadata' => 'json',
         ];
     }
 }
