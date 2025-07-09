@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\DTOs\UserDto;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IndexUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
@@ -11,7 +12,6 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
@@ -35,12 +35,12 @@ class UserController extends Controller
      * Display a paginated listing of users
      * 
      * Retrieves all users with pagination support. Default pagination is 15 items per page.
-     * Supports query parameter 'per_page' to customize pagination size.
+     * Supports query parameters for pagination control with validation.
      * 
-     * @param Request $request HTTP request object containing query parameters
+     * @param IndexUserRequest $request Validated request with pagination parameters
      * @return UserCollection Paginated user collection with metadata
      */
-    public function index(Request $request): UserCollection
+    public function index(IndexUserRequest $request): UserCollection
     {
         $perPage = (int) $request->get('per_page', 15);
         $users = $this->userService->getAllUsers($perPage);
