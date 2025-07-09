@@ -38,14 +38,14 @@ class UserController extends Controller
      * Supports query parameter 'per_page' to customize pagination size.
      * 
      * @param Request $request HTTP request object containing query parameters
-     * @return JsonResponse Paginated user collection with metadata
+     * @return UserCollection Paginated user collection with metadata
      */
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): UserCollection
     {
         $perPage = (int) $request->get('per_page', 15);
         $users = $this->userService->getAllUsers($perPage);
 
-        return (new UserCollection($users))->response();
+        return new UserCollection($users);
     }
 
     /**
@@ -74,11 +74,11 @@ class UserController extends Controller
      * resolves the User model or returns 404 if not found.
      * 
      * @param User $user User model instance (auto-resolved by Laravel)
-     * @return JsonResponse User resource
+     * @return UserResource User resource
      */
-    public function show(User $user): JsonResponse
+    public function show(User $user): UserResource
     {
-        return (new UserResource($user))->response();
+        return new UserResource($user);
     }
 
     /**
@@ -90,14 +90,14 @@ class UserController extends Controller
      * 
      * @param UpdateUserRequest $request Validated request containing updated user data
      * @param User $user User model instance to update (auto-resolved by Laravel)
-     * @return JsonResponse Updated user resource
+     * @return UserResource Updated user resource
      */
-    public function update(UpdateUserRequest $request, User $user): JsonResponse
+    public function update(UpdateUserRequest $request, User $user): UserResource
     {
         $dto = UserDto::fromUpdateRequest($request);
         $updatedUser = $this->userService->updateUser($user, $dto);
 
-        return (new UserResource($updatedUser))->response();
+        return new UserResource($updatedUser);
     }
 
     /**
