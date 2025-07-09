@@ -37,31 +37,6 @@ class UserCollection extends ResourceCollection
                 'total_pages' => $this->lastPage(),
                 'has_more_pages' => $this->hasMorePages(),
             ],
-            'links' => [
-                'first' => $this->url(1),
-                'last' => $this->url($this->lastPage()),
-                'prev' => $this->previousPageUrl(),
-                'next' => $this->nextPageUrl(),
-            ],
-        ];
-    }
-
-    /**
-     * Get additional data that should be returned with the resource array
-     * 
-     * @param Request $request The HTTP request instance
-     * @return array<string, mixed> Additional collection data
-     */
-    public function with(Request $request): array
-    {
-        return [
-            'version' => '1.0',
-            'api_info' => [
-                'endpoint' => 'users',
-                'method' => 'GET',
-                'supports_pagination' => true,
-                'max_per_page' => 100,
-            ],
         ];
     }
 }

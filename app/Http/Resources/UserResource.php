@@ -41,21 +41,4 @@ class UserResource extends JsonResource
             'updated_at' => $this->updated_at->toISOString(),
         ];
     }
-
-    /**
-     * Get additional data that should be returned with the resource array
-     * 
-     * @param Request $request The HTTP request instance
-     * @return array<string, mixed> Additional resource data
-     */
-    public function with(Request $request): array
-    {
-        return [
-            'links' => [
-                'self' => route('users.show', $this->id),
-                'edit' => route('users.update', $this->id),
-                'delete' => route('users.destroy', $this->id),
-            ],
-        ];
-    }
 }
