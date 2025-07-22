@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\DTOs\UserDto;
 use App\Models\User;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Pagination\CustomPaginator;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -22,16 +22,16 @@ class UserService
      * Results are ordered by creation date (newest first).
      * 
      * @param int $perPage Number of users per page (default: 15, max: 100)
-     * @return LengthAwarePaginator Paginated collection of users
+     * @return CustomPaginator Paginated collection of users
      * 
      * @throws \InvalidArgumentException When perPage is less than 1 or greater than 100
      */
-    public function getAllUsers(int $perPage = 15): LengthAwarePaginator
+    public function getAllUsers(int $perPage = 15): CustomPaginator
     {
         $this->validatePerPage($perPage);
 
         return User::orderBy('created_at', 'desc')
-            ->paginate($perPage);
+            ->customPaginate($perPage);
     }
 
     /**

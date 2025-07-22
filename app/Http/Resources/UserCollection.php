@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Pagination\CustomPaginator;
 
 /**
  * User Collection Resource
@@ -12,7 +13,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  * 
  * @property-read \Illuminate\Pagination\LengthAwarePaginator $resource
  */
-class UserCollection extends ResourceCollection
+class UserCollection extends BaseCollection
 {
     /**
      * The resource that this resource collects.

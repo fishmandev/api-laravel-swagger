@@ -38,7 +38,7 @@ class UserController extends Controller
      * Supports query parameters for pagination control with validation.
      * 
      * @param IndexUserRequest $request Validated request with pagination parameters
-     * @return UserCollection Paginated user collection with metadata
+     * @return UserCollection Paginated user collection with custom pagination structure
      */
     public function index(IndexUserRequest $request): UserCollection
     {
